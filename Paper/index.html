@@ -1,0 +1,48 @@
+<!-- <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script> -->
+
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBe1vxBD_-S9ang8S0CpQcoGRbv6K_aX4Y",
+    authDomain: "paper-1a6a7.firebaseapp.com",
+    databaseURL: "https://paper-1a6a7.firebaseio.com",
+    projectId: "paper-1a6a7",
+    storageBucket: "paper-1a6a7.appspot.com",
+    messagingSenderId: "57096692386"
+  };
+  firebase.initializeApp(config);
+  // Initialize Cloud Firestore through Firebase
+  var db = firebase.firestore();
+
+  // Disable deprecated features
+  db.settings({
+    timestampsInSnapshots: true
+  });
+
+  db.collection("whiteboards").add({
+    name: "My Board",
+    operations: []
+  })
+  .then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+    console.log("Listening for changes...");
+    docRef.onSnapshot(function(doc) {
+        console.log("Current data: ", doc.data());
+    }, function(error) {
+        console.log(error);
+    });
+  })
+  .catch(function(error) {
+      console.error("Error adding document: ", error);
+  });
+
+  // db.collection("users").doc("U9SrUs7IeCn9Wb3nKzVN")
+  //   .onSnapshot(function(doc) {
+  //       console.log("Current data: ", doc.data());
+  //   }, function(error) {
+  //       console.log(error);
+  //   });
+
+</script>

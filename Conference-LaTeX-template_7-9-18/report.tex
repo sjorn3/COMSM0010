@@ -1,0 +1,88 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+  T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\newcommand{\name}{Paper}
+
+\title{\name{}: A Realtime Shared Whiteboard}
+% {\footnotesize A realtime shared whiteboard.}
+
+\author{\IEEEauthorblockN{Sean Innes}
+\IEEEauthorblockA{\textit{University of Bristol} \\
+sean.innes@bristol.ac.uk}
+}
+
+\maketitle
+
+\begin{abstract}
+In a personal setting, the ability to jot down ideas and share thoughts is
+invaluable to both the creative and educative processes. On a global scale, the
+ability to engage in these activities is dramatically reduced by the physical
+distance between you. In a packed lecture hall setting, a lecturer can't do much
+more than talk at their students and hope for the best. \name{} aims to provide
+the shared scratch surface to explore and develop ideas in real time, and allow
+engagement from all parties.
+\end{abstract}
+
+\section{Introduction}
+// Ramble to express ideas, add proper structure in the final version.
+
+Our idea is to create a real time shared whiteboard. The idea is simple enough,
+but quite wide in scope, so our exact remit is restricted to a website that
+gives a link to a whiteboard, and anyone who accesses this link is able to edit
+content. There are countless ways this could be extended, some of which are
+outlined below. The usage of such a page also potentially goes well beyond that
+of a standard whiteboard. For example playing noughts and crosses with a friend
+in the US, which is why we've gone for the more general name \name{}.
+
+Since realtimeness and scalability are crucial to demonstrate this products
+viability, the initial aim would be to get a working demonstration of this.
+Showing that latency is respectable both when many users access the same
+whiteboard and when many whiteboards exist.
+
+\subsection{Extensions}
+
+There are many ways this could be extended, some of our favourite ideas are
+outlined here:
+
+\begin{itemize}
+  \item Allow submissions to be vetted by the creator of the whiteboard. Perhaps
+  by their own decision or give the option for the group to vote. If a lecturer
+  asks a question, some students could submit answers (as drawings on the
+  whiteboard) and the rest could vote on the ones they think are correct, for
+  example, and the best one can be added to the board (as decided by the owner).
+  \item Since this is simple vector graphics, you can record their application
+  to the board and allow later playback. Perhaps alongside a recorded video
+  call or lecture.
+  \item To monetise the project, a whiteboard could be restricted to ten users,
+  and an appropriate license lifts this restriction. For example an
+  organization or university license.
+  \item Accessing the link after the presentation/discussion is over we can
+  provide a pdf or similar of the final state of the board. Additionally an
+  animation if that feature is implemented.
+  \item Generally improved tooling. Multiple colours, adding images, shapes,
+  perhaps a background pdf so you could draw on a presentation.
+\end{itemize}
+
+\subsection{Implementation}
+Likely a Kubernetes cluster that stores the current state of the boards and can
+report updates to this state to clients which subscribe to them. Preferably over
+sockets due to the latency benefit. The frontend will be written in elm, a typed
+functional language that compiles to javascript, since it is very efficient at
+manipulating DOM and Canvas elements. 
+
+In general, design decisions should have the central goal of minimizing the
+latency between writing on the board and everyone with access to it seeing this
+change. Ideally this latency would be comfortably below whatever the latency of
+the video feed or other connection has.
+
+\end{document}
