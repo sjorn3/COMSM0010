@@ -1,0 +1,6 @@
+main.js
+main.min.js
+/elm-stuff
+/node_modules
+/firebase
+package-lock.json

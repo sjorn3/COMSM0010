@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <!-- <link rel="stylesheet" href="whatever-you-want.css"> -->
+  <script src="main.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+</head>
+
+<body>
+  <!-- <span style="width:100%; height:100%"> -->
+  <div id="elm"></div>
+  <!-- </span> -->
+  <script>
+  // // Initialize Firebase
+  // var config = {
+  //   apiKey: "AIzaSyBe1vxBD_-S9ang8S0CpQcoGRbv6K_aX4Y",
+  //   authDomain: "paper-1a6a7.firebaseapp.com",
+  //   databaseURL: "https://paper-1a6a7.firebaseio.com",
+  //   projectId: "paper-1a6a7",
+  //   storageBucket: "paper-1a6a7.appspot.com",
+  //   messagingSenderId: "57096692386"
+  // };
+  // firebase.initializeApp(config);
+  // // Initialize Cloud Firestore through Firebase
+  // var db = firebase.firestore();
+
+  // // Disable deprecated features
+  // db.settings({
+  //   timestampsInSnapshots: true
+  // });
+
+  // // db.collection("whiteboards").add({
+  // //   name: "My Board",
+  // //   operations: []
+  // // })
+  // // .then(function(docRef) {
+  // //   console.log("Document written with ID: ", docRef.id);
+  // //   console.log("Listening for changes...");
+  // //   docRef.onSnapshot(function(doc) {
+  // //       console.log("Current data: ", doc.data());
+  // //   }, function(error) {
+  // //       console.log(error);
+  // //   });
+  // // })
+  // // .catch(function(error) {
+  // //     console.error("Error adding document: ", error);
+  // // });
+
+  // // db.collection("users").doc("U9SrUs7IeCn9Wb3nKzVN")
+  // //   .onSnapshot(function(doc) {
+  // //       console.log("Current data: ", doc.data());
+  // //   }, function(error) {
+  // //       console.log(error);
+  // //   });
+
+
+  // var url = new URL(window.location.href);
+  // var whiteboard = url.searchParams.get("whiteboard");
+  // var boardRef = db.collection("whiteboards").doc(whiteboard);
+  // var operations = boardRef.collection("operations");
+  // // var receive = null
+
+  // // This is actually unnecessary because of how collections work.
+  // // boardRef.get().then(function(doc) {
+  // //   if (doc.exists) {
+  // //       console.log("Document data:", doc.data());
+  // //   } else {
+  // //       // doc.data() will be undefined in this case
+  // //       console.log("No such document!");
+  // //       boardRef.set({
+  // //         // name: "irrelevant"
+  // //         // operations: []
+  // //       })
+  // //       // boardRef.collection("operations")
+  // //   }
+  // // }).catch(function(error) {
+  // //     console.log("Error getting document:", error);
+  // // });
+
+  // var app = Elm.Main.init({
+  //   node: document.getElementById('elm'),
+  // });
+
+  // app.ports.send.subscribe(function(data) {
+  //   operations.add(data);
+  //   // console.log(data);
+  //   // boardRef.update({
+  //   //   operations: firebase.firestore.FieldValue.arrayUnion(data)
+  //   // });
+  // });
+
+  // operations.onSnapshot(function(snapshot) {
+  //   // console.log()
+  //   // console.log(snapshot)
+  //   // var start = new Date();
+  //   var operations = [];
+  //   snapshot.forEach(doc => operations.push(doc.data()));
+  //   // console.log(operations)
+  //   app.ports.receive.send(operations);
+
+
+  //   // Do things here
+  //   // var finish = new Date();
+  //   // var difference = new Date();
+  //   // difference.setTime(finish.getTime() - start.getTime());
+  //   // alert( difference.getMilliseconds() );
+  //   // snapshot
+  //   // console.log(map(arr => arr.data(), doc));
+
+  //   // console.log("Current data: ", doc.data());
+  // }, function(error) {
+  //   console.log(error);
+  // });
+
+  // Initialize Firebase
+  function main(){
+  console.time("now");
+  console.log(new Date().getTime());
+  var config = {
+    apiKey: "AIzaSyBe1vxBD_-S9ang8S0CpQcoGRbv6K_aX4Y",
+    authDomain: "paper-1a6a7.firebaseapp.com",
+    databaseURL: "https://paper-1a6a7.firebaseio.com",
+    projectId: "paper-1a6a7",
+    storageBucket: "paper-1a6a7.appspot.com",
+    messagingSenderId: "57096692386"
+  };
+  firebase.initializeApp(config);
+  // Initialize Cloud Firestore through Firebase
+  var db = firebase.firestore();
+
+  // Disable deprecated features
+  db.settings({
+    timestampsInSnapshots: true
+  });
+
+  // db.collection("whiteboards").add({
+  //   name: "My Board",
+  //   operations: []
+  // })
+  // .then(function(docRef) {
+  //   console.log("Document written with ID: ", docRef.id);
+  //   console.log("Listening for changes...");
+  //   docRef.onSnapshot(function(doc) {
+  //       console.log("Current data: ", doc.data());
+  //   }, function(error) {
+  //       console.log(error);
+  //   });
+  // })
+  // .catch(function(error) {
+  //     console.error("Error adding document: ", error);
+  // });
+
+  // db.collection("users").doc("U9SrUs7IeCn9Wb3nKzVN")
+  //   .onSnapshot(function(doc) {
+  //       console.log("Current data: ", doc.data());
+  //   }, function(error) {
+  //       console.log(error);
+  //   });
+
+
+  var url = new URL(window.location.href);
+  var whiteboard = url.searchParams.get("whiteboard");
+  var boardRef = db.collection("whiteboards").doc(whiteboard);
+  var operations = boardRef.collection("operations");
+  // var receive = null
+
+  // This is actually unnecessary because of how collections work.
+  // boardRef.get().then(function(doc) {
+  //   if (doc.exists) {
+  //       console.log("Document data:", doc.data());
+  //   } else {
+  //       // doc.data() will be undefined in this case
+  //       console.log("No such document!");
+  //       boardRef.set({
+  //         // name: "irrelevant"
+  //         // operations: []
+  //       })
+  //       // boardRef.collection("operations")
+  //   }
+  // }).catch(function(error) {
+  //     console.log("Error getting document:", error);
+  // });
+
+  var app = Elm.Main.init({
+    node: document.getElementById('elm'),
+  });
+
+  app.ports.send.subscribe(function(data) {
+    operations.add(data);
+    // console.log(data);
+    // boardRef.update({
+    //   operations: firebase.firestore.FieldValue.arrayUnion(data)
+    // });
+  });
+
+  operations.onSnapshot(function(snapshot) {
+    // console.log()
+    // console.log(snapshot)
+    // var start = new Date();
+    console.timeEnd("now");
+    location.reload()
+    // firebase.app().delete().then(function() {
+      // main();
+      
+      // firebase.initializeApp(myNewConfig);
+    // });
+
+    var operations = [];
+    snapshot.forEach(doc => operations.push(doc.data()));
+    // console.log(operations)
+    app.ports.receive.send(operations);
+
+
+    // Do things here
+    // var finish = new Date();
+    // var difference = new Date();
+    // difference.setTime(finish.getTime() - start.getTime());
+    // alert( difference.getMilliseconds() );
+    // snapshot
+    // console.log(map(arr => arr.data(), doc));
+
+    // console.log("Current data: ", doc.data());
+  }, function(error) {
+    console.log(error);
+  });
+
+  }
+
+  main();
+
+  </script>
+</body>
+</html>
